@@ -1,0 +1,17 @@
+import time
+import psutil as ps
+
+def display_uses(cpu, ram, bars=50):
+    cpu_percent = (cpu/100)
+    cpu_bar = '█' * int(cpu_percent * bars) + '-' * (bars - int(cpu_percent))
+
+    ram_percent = (ram/100)
+    ram_bar = '█' * int(ram_percent * bars) + '-' * (bars - int(ram_percent))
+
+    print(f"\r CPU : [{cpu_bar}] {cpu:.2f}%  RAM : [{ram_bar}] {ram:.2f} %", end="\r")
+
+
+
+while True:
+    display_uses(ps.cpu_percent(), ps.virtual_memory().percent, 20)
+    time.sleep(0.5)
